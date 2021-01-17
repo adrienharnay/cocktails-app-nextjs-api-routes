@@ -1,6 +1,6 @@
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext } from "next";
 
-import { parseServerCookies } from 'src/utils/ServerCookieUtils';
+import { parseServerCookies } from "src/utils/next/ServerCookieUtils";
 
 export const requireToken = (context: GetServerSidePropsContext) => {
   const cookies = parseServerCookies(context);
@@ -8,7 +8,7 @@ export const requireToken = (context: GetServerSidePropsContext) => {
   if (!cookies.token) {
     return {
       redirect: {
-        destination: '/login',
+        destination: "/login",
         permanent: false,
       },
     };

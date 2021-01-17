@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from "react";
+import { getColorValueFromColorName } from "src/utils/ui/ColorUtils";
 import { BoxProps } from "./types";
 
 const Box: FunctionComponent<BoxProps> = ({
   children,
+  backgroundColor,
   borderColor,
   flex,
   flexGrow,
@@ -21,6 +23,8 @@ const Box: FunctionComponent<BoxProps> = ({
         flex,
         flexGrow,
         flexShrink,
+        backgroundColor:
+          backgroundColor && getColorValueFromColorName(backgroundColor),
         border: borderColor && `1px solid ${borderColor}`,
         ...otherProps,
       }}

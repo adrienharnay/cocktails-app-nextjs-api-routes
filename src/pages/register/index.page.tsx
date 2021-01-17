@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 
-import MetaTitle from 'src/components/meta/MetaTitle';
+import MetaTitle from "src/components/meta/MetaTitle";
 
-import { useRequireNoToken } from 'src/utils/ClientRouterUtils';
+import { useRequireNoToken } from "src/utils/next/ClientRouterUtils";
 
-const RegisterPage: FunctionComponent = () => {
+const Register: FunctionComponent = () => {
   const { redirect } = useRequireNoToken();
 
   if (redirect) {
@@ -19,4 +19,4 @@ const RegisterPage: FunctionComponent = () => {
   );
 };
 
-export default RegisterPage;
+export default Register;

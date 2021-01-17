@@ -1,9 +1,9 @@
-import { GetServerSideProps } from 'next';
-import React, { FunctionComponent } from 'react';
+import { GetServerSideProps } from "next";
+import React, { FunctionComponent } from "react";
 
-import MetaTitle from 'src/components/meta/MetaTitle';
+import MetaTitle from "src/components/meta/MetaTitle";
 
-import { requireToken } from 'src/utils/ServerRouterUtils';
+import { requireToken } from "src/utils/next/ServerRouterUtils";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const redirect = requireToken(context);
@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return { props: {} };
 };
 
-const IndexPage: FunctionComponent = () => {
+const Index: FunctionComponent = () => {
   return (
     <>
       <MetaTitle title="Index" />
@@ -23,4 +23,4 @@ const IndexPage: FunctionComponent = () => {
   );
 };
 
-export default IndexPage;
+export default Index;

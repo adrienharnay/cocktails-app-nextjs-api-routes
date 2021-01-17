@@ -1,3 +1,5 @@
+import { BackgroundColor } from "src/utils/ui/ColorUtils";
+
 export type BoxProps = {
   width?: number;
   margin?: number;
@@ -6,7 +8,7 @@ export type BoxProps = {
   padding?: number;
   paddingVertical?: number;
   paddingHorizontal?: number;
-  backgroundColor?: string;
+  backgroundColor?: BackgroundColor;
   borderColor?: string;
   borderRadius?: number;
   boxShadow?: string;

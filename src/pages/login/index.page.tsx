@@ -1,10 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 
-import MetaTitle from 'src/components/meta/MetaTitle';
+import MetaTitle from "src/components/meta/MetaTitle";
+import LoginPage from "./js/LoginPage";
 
-import { useRequireNoToken } from 'src/utils/ClientRouterUtils';
+import { useRequireNoToken } from "src/utils/next/ClientRouterUtils";
 
-const LoginPage: FunctionComponent = () => {
+const Login: FunctionComponent = () => {
   const { redirect } = useRequireNoToken();
 
   if (redirect) {
@@ -14,9 +15,9 @@ const LoginPage: FunctionComponent = () => {
   return (
     <>
       <MetaTitle title="Login" />
-      <div />
+      <LoginPage />
     </>
   );
 };
 
-export default LoginPage;
+export default Login;

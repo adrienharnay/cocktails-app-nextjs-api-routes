@@ -1,0 +1,76 @@
+@mixin colored-button(
+  $textColor,
+  $disabledTextColor,
+  $backgroundColor,
+  $disabledBackgroundColor,
+  $borderColor,
+  $disabledBorderColor
+) {
+  &:not(.disabled) {
+    border-color: $borderColor;
+    background: $backgroundColor;
+
+    > * {
+      color: $textColor !important;
+    }
+
+    &:hover {
+      border-color: darken($borderColor, 10%);
+      background: darken($backgroundColor, 10%);
+
+      > * {
+        color: darken($textColor, 10%) !important;
+      }
+    }
+  }
+
+  &.disabled {
+    border-color: $disabledBorderColor;
+    background: $disabledBackgroundColor;
+
+    > * {
+      color: $disabledTextColor !important;
+    }
+  }
+}
+
+.button {
+  display: inline-block;
+  border: 0;
+  text-align: center;
+  vertical-align: middle;
+  outline: none;
+  transition: all 0.3s ease;
+  user-select: none;
+
+  &:not([disabled]) {
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  &.block {
+    width: 100%;
+    padding: 0;
+  }
+
+  @include colored-button(
+    $textColor: white,
+    $disabledTextColor: white,
+    $backgroundColor: #02c39a,
+    $disabledBackgroundColor: #00a896,
+    $borderColor: #02c39a,
+    $disabledBorderColor: #00a896
+  );
+
+  min-width: 238px;
+  max-width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  border-radius: 24px;
+
+  .hiddenContent {
+    overflow: hidden;
+    display: block;
+    max-height: 0;
+  }
+}

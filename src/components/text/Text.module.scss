@@ -1,0 +1,19 @@
+.text .text,
+.text .textChild {
+  display: inline;
+}
+
+.text {
+  white-space: pre-line;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hyphenate {
+  hyphens: auto;
+  word-break: break-word;
+}
