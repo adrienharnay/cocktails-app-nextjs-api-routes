@@ -12,7 +12,6 @@ export type BoxProps = {
   borderColor?: string;
   borderRadius?: number;
   boxShadow?: string;
-  flex?: number;
   flexGrow?: number;
   flexShrink?: number;
   order?: number;

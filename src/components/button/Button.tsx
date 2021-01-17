@@ -7,10 +7,7 @@ import { ButtonProps } from "./types";
 import styles from "./Button.module.scss";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    { children, variant, block, loading, disabled, className, ...otherProps },
-    ref
-  ) => {
+  ({ children, block, loading, disabled, className, ...otherProps }, ref) => {
     const ReplacementContent = loading && "...";
 
     const Text = ReplacementContent ? (
@@ -21,7 +18,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const classes = [
       styles.button,
-      styles[variant],
       block && styles.block,
       disabled && styles.disabled,
       className,

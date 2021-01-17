@@ -14,7 +14,6 @@ export type StackProps = {
   space?: number;
   horizontalAlign?: HorizontalAlign;
   verticalAlign?: VerticalAlign;
-  flex?: number;
   flexGrow?: number;
   flexShrink?: number;
   order?: number;

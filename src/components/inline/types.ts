@@ -15,7 +15,6 @@ export type InlineProps = {
   verticalAlign?: VerticalAlign;
   noWrap?: boolean;
   space?: number;
-  flex?: number;
   flexGrow?: number;
   flexShrink?: number;
   order?: number;

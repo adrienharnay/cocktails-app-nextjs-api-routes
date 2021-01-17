@@ -56,10 +56,10 @@
   @include colored-button(
     $textColor: white,
     $disabledTextColor: white,
-    $backgroundColor: #02c39a,
-    $disabledBackgroundColor: #00a896,
-    $borderColor: #02c39a,
-    $disabledBorderColor: #00a896
+    $backgroundColor: #06c6a3,
+    $disabledBackgroundColor: #c3fdf2,
+    $borderColor: #06c6a3,
+    $disabledBorderColor: #c3fdf2
   );
 
   min-width: 238px;

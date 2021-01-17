@@ -9,7 +9,7 @@ type PublicBoxProps = {
 
 const PublicBox: FunctionComponent<PublicBoxProps> = ({ children }) => {
   return (
-    <Inline verticalAlign="top" horizontalAlign="center" flex={1}>
+    <Inline verticalAlign="top" horizontalAlign="center">
       <Box
         backgroundColor="background-white"
         boxShadow="0px 10px 50px rgba(2, 6, 35, 0.05)"
