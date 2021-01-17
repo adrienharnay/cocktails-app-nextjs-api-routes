@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+yarn-error.log
+.cache/
+
+# Coverage directories used by tools like istanbul
+coverage/
+
+# MacOS
+.DS_Store
+
+# TS build info
+tsconfig.tsbuildinfo
+
+# Build
+.next/
