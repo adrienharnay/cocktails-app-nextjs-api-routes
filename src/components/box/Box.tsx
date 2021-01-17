@@ -1,22 +1,5 @@
 import React, { FunctionComponent } from "react";
-
-type BoxProps = {
-  width?: number;
-  margin?: number;
-  marginVertical?: number;
-  marginHorizontal?: number;
-  padding?: number;
-  paddingVertical?: number;
-  paddingHorizontal?: number;
-  backgroundColor?: string;
-  borderColor?: string;
-  borderRadius?: number;
-  boxShadow?: string;
-  flex?: number;
-  flexGrow?: number;
-  flexShrink?: number;
-  order?: number;
-};
+import { BoxProps } from "./types";
 
 const Box: FunctionComponent<BoxProps> = ({
   children,
