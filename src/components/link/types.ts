@@ -5,4 +5,5 @@ export type LinkProps = {
   url: string;
   disabled?: boolean;
   styled?: boolean;
+  className?: string;
 };

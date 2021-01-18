@@ -4322,28 +4322,6 @@
     ]
   },
   {
-    "id": "dd5ac8bd-0fb8-4506-a51a-0d2a2204ee13",
-    "name": "Brigadier",
-    "picture": "https://null",
-    "category": "Cocktail",
-    "glass": "Irish coffee cup",
-    "instructions": "Mix ingredients in a warmed mug and stir.",
-    "ingredients": [
-      {
-        "quantity": "4 oz",
-        "name": "Hot chocolate"
-      },
-      {
-        "quantity": "1 oz",
-        "name": "Green chartreuse"
-      },
-      {
-        "quantity": "1 oz",
-        "name": "Cherry heering"
-      }
-    ]
-  },
-  {
     "id": "643c7a20-f9ff-4e7b-b498-6e4983bf5cec",
     "name": "Bruce's puce",
     "picture": "https://www.thecocktaildb.com/images/media/drink/svsvqv1473344558.jpg",

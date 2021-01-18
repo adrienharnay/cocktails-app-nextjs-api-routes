@@ -5,6 +5,7 @@ import ConnectedLayout from "src/components/connected-layout/js/ConnectedLayout"
 import MetaTitle from "src/components/meta/MetaTitle";
 
 import { requireToken } from "src/utils/next/ServerRouterUtils";
+import CocktailsPage from "./index/js/CocktailsPage";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const redirect = requireToken(context);
@@ -18,9 +19,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const Index: FunctionComponent = () => {
   return (
     <>
-      <MetaTitle title="Index" />
+      <MetaTitle title="Cocktails" />
       <ConnectedLayout>
-        <div />
+        <CocktailsPage />
       </ConnectedLayout>
     </>
   );

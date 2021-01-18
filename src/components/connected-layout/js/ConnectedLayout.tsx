@@ -3,6 +3,7 @@ import React, { FunctionComponent, ReactNode } from "react";
 
 import Box from "src/components/box/Box";
 import Inline from "src/components/inline/Inline";
+import Link from "src/components/link/Link";
 import Stack from "src/components/stack/Stack";
 import BodyHigh from "src/components/text/BodyHigh";
 
@@ -24,7 +25,10 @@ const ConnectedLayout: FunctionComponent<ConnectedLayoutProps> = ({
         backgroundColor="background-primary"
         boxShadow="shadow-around"
       >
-        <Inline horizontalAlign="right" verticalAlign="center">
+        <Inline horizontalAlign="space-between" verticalAlign="center">
+          <Link url="/" styled={false}>
+            <BodyHigh color="text-white">Home</BodyHigh>
+          </Link>
           <div
             onClick={() => {
               removeClientCookie("token");

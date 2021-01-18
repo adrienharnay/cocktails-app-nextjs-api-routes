@@ -1,15 +1,15 @@
-import NextLink from 'next/link';
-import React, { FunctionComponent } from 'react';
+import NextLink from "next/link";
+import React, { FunctionComponent } from "react";
 
-import textStyles from 'src/components/text/Text.module.scss';
+import textStyles from "src/components/text/Text.module.scss";
 
-import { LinkProps } from './types';
+import { LinkProps } from "./types";
 
-import styles from './Link.module.scss';
+import styles from "./Link.module.scss";
 
 const TARGET_BLANK_PASSED_PROPS = {
-  target: '_blank',
-  rel: 'noreferrer noopener',
+  target: "_blank",
+  rel: "noreferrer noopener",
 };
 
 const Link: FunctionComponent<LinkProps> = ({
@@ -17,21 +17,23 @@ const Link: FunctionComponent<LinkProps> = ({
   url,
   disabled,
   styled = true,
+  className,
 }) => {
   const classNames = [
     styles.link,
     textStyles.textChild,
     disabled && styles.disabled,
     styled && styles.styled,
+    className,
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(" ");
 
   if (disabled) {
     return <span className={classNames}>{children}</span>;
   }
 
-  if (url.startsWith('/')) {
+  if (url.startsWith("/")) {
     return (
       <NextLink href={url}>
         {
@@ -42,7 +44,7 @@ const Link: FunctionComponent<LinkProps> = ({
     );
   }
 
-  const targetBlank = !url.startsWith('mailto') && !url.startsWith('tel');
+  const targetBlank = !url.startsWith("mailto") && !url.startsWith("tel");
 
   return (
     <a

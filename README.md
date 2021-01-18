@@ -13,7 +13,7 @@ For the test to be relevant, the app should support the following features:
 - Authentication features (content will be protected behind authentication)
 - List of cocktails (simple querying)
 - Search for cocktails by ingredient (search)
-- Rate cocktails (simple write)
+- Like cocktails (simple write)
 - Get a cocktail at random (custom logic)
 
 The tools I am interested in testing should support all these use cases, and also:
