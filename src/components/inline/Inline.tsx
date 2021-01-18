@@ -13,7 +13,6 @@ const Inline: FunctionComponent<InlineProps> = ({
   verticalAlign,
   noWrap = false,
   space,
-  flex,
   flexGrow,
   flexShrink,
 }) => {
@@ -25,7 +24,6 @@ const Inline: FunctionComponent<InlineProps> = ({
       }
 
       const isFlex =
-        child.props?.flex !== undefined ||
         child.props?.flexGrow !== undefined ||
         child.props?.flexShrink !== undefined;
 
@@ -33,7 +31,6 @@ const Inline: FunctionComponent<InlineProps> = ({
         <div
           style={{
             display: isFlex ? "flex" : undefined,
-            flex: child.props?.flex,
             flexGrow: child.props?.flexGrow,
             flexShrink: child.props?.flexShrink,
             order: child.props?.order,
@@ -58,7 +55,6 @@ const Inline: FunctionComponent<InlineProps> = ({
         alignItems: verticalAlign
           ? getAlignItemsFromVerticalAlign(verticalAlign)
           : undefined,
-        flex,
         flexGrow,
         flexShrink,
         marginTop: space ? space * -1 : undefined,

@@ -9,7 +9,6 @@ import {
 const Stack: FunctionComponent<StackProps> = ({
   children,
   space,
-  flex,
   flexGrow,
   flexShrink,
   horizontalAlign,
@@ -23,7 +22,6 @@ const Stack: FunctionComponent<StackProps> = ({
       }
 
       const isFlex =
-        child.props?.flex !== undefined ||
         child.props?.flexGrow !== undefined ||
         child.props?.flexShrink !== undefined;
 
@@ -32,7 +30,6 @@ const Stack: FunctionComponent<StackProps> = ({
           style={{
             display: isFlex ? "flex" : undefined,
             flexDirection: isFlex ? "column" : undefined,
-            flex: child.props?.flex,
             flexGrow: child.props?.flexGrow,
             flexShrink: child.props?.flexShrink,
             order: child.props?.order,
@@ -60,7 +57,6 @@ const Stack: FunctionComponent<StackProps> = ({
         alignItems: horizontalAlign
           ? getAlignItemsFromHorizontalAlign(horizontalAlign)
           : undefined,
-        flex,
         flexGrow,
         flexShrink,
         marginTop: space ? space * -1 : undefined,

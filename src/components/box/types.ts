@@ -1,4 +1,4 @@
-import { BackgroundColor } from "src/utils/ui/ColorUtils";
+import { BackgroundColor, Shadow } from "src/utils/ui/ColorUtils";
 
 export type BoxProps = {
   width?: number;
@@ -11,7 +11,7 @@ export type BoxProps = {
   backgroundColor?: BackgroundColor;
   borderColor?: string;
   borderRadius?: number;
-  boxShadow?: string;
+  boxShadow?: Shadow;
   flexGrow?: number;
   flexShrink?: number;
   order?: number;

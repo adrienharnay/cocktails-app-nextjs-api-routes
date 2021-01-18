@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import React, { FunctionComponent } from "react";
+import ConnectedLayout from "src/components/connected-layout/js/ConnectedLayout";
 
 import MetaTitle from "src/components/meta/MetaTitle";
 
@@ -18,7 +19,9 @@ const Index: FunctionComponent = () => {
   return (
     <>
       <MetaTitle title="Index" />
-      <div />
+      <ConnectedLayout>
+        <div />
+      </ConnectedLayout>
     </>
   );
 };

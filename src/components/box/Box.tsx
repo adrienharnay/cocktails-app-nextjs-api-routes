@@ -4,9 +4,15 @@ import { BoxProps } from "./types";
 
 const Box: FunctionComponent<BoxProps> = ({
   children,
+  margin,
+  marginHorizontal,
+  marginVertical,
+  padding,
+  paddingHorizontal,
+  paddingVertical,
   backgroundColor,
   borderColor,
-  flex,
+  boxShadow,
   flexGrow,
   flexShrink,
   ...otherProps
@@ -15,17 +21,23 @@ const Box: FunctionComponent<BoxProps> = ({
     <div
       style={{
         display:
-          flex !== undefined ||
-          flexGrow !== undefined ||
-          flexShrink !== undefined
+          flexGrow !== undefined || flexShrink !== undefined
             ? "flex"
             : undefined,
-        flex,
+        marginTop: marginVertical || margin,
+        marginBottom: marginVertical || margin,
+        marginLeft: marginHorizontal || margin,
+        marginRight: marginHorizontal || margin,
+        paddingTop: paddingVertical || padding,
+        paddingBottom: paddingVertical || padding,
+        paddingLeft: paddingHorizontal || padding,
+        paddingRight: paddingHorizontal || padding,
         flexGrow,
         flexShrink,
         backgroundColor:
           backgroundColor && getColorValueFromColorName(backgroundColor),
         border: borderColor && `1px solid ${borderColor}`,
+        boxShadow: boxShadow && getColorValueFromColorName(boxShadow),
         ...otherProps,
       }}
     >

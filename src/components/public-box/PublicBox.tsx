@@ -12,8 +12,8 @@ const PublicBox: FunctionComponent<PublicBoxProps> = ({ children }) => {
     <Inline verticalAlign="top" horizontalAlign="center">
       <Box
         backgroundColor="background-white"
-        boxShadow="0px 10px 50px rgba(2, 6, 35, 0.05)"
-        margin={32}
+        boxShadow="shadow-around"
+        marginVertical={32}
         padding={24}
         borderRadius={24}
         width={320}

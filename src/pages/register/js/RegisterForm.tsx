@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 const timeout = (time: number) =>
   new Promise((resolve) => setTimeout(resolve, time));
 
-const LoginForm: FunctionComponent = () => {
+const RegisterForm: FunctionComponent = () => {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -33,7 +33,7 @@ const LoginForm: FunctionComponent = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Stack space={32}>
-        <Header color="text-primary-high">Log in</Header>
+        <Header color="text-primary-high">Register</Header>
         <Stack space={24}>
           <Input
             type="email"
@@ -64,4 +64,4 @@ const LoginForm: FunctionComponent = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
