@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
 import Box from "src/components/box/Box";
+import Button from "src/components/button/Button";
 import Inline from "src/components/inline/Inline";
 import Stack from "src/components/stack/Stack";
 import Body from "src/components/text/Body";
@@ -10,11 +12,16 @@ import Subtitle from "src/components/text/Subtitle";
 
 import cocktails from "../../../../../data/cocktails.json";
 
+const getRandomCocktail = () =>
+  cocktails[Math.floor(Math.random() * cocktails.length)];
+
 type CocktailPageProps = {
   cocktail: typeof cocktails[number];
 };
 
 const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
+  const router = useRouter();
+
   return (
     <Box padding={32}>
       <Stack space={32}>
@@ -56,6 +63,13 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
           ))}
         </Stack>
         <Body color="text-primary-high">{cocktail.instructions}</Body>
+        <Button
+          onClick={() => {
+            router.push(`/cocktails/${getRandomCocktail().id}`);
+          }}
+        >
+          Get random cocktail!
+        </Button>
       </Stack>
     </Box>
   );

@@ -11,8 +11,12 @@ import Link from "src/components/link/Link";
 
 import styles from "../css/CocktailsPage.module.scss";
 import Input from "src/components/input/Input";
+import Button from "src/components/button/Button";
+import { useRouter } from "next/router";
 
 const CocktailsPage: FunctionComponent = () => {
+  const router = useRouter();
+
   const [search, setSearch] = useState("");
 
   const filteredCocktails = useMemo(
@@ -27,17 +31,29 @@ const CocktailsPage: FunctionComponent = () => {
     [search, cocktails]
   );
 
+  const getRandomCocktail = () =>
+    filteredCocktails[Math.floor(Math.random() * filteredCocktails.length)];
+
   return (
     <Box paddingHorizontal={32} paddingVertical={16}>
       <Stack space={24}>
-        <Input
-          onDark
-          placeholder="Search by ingredient..."
-          onChange={debounce((e) => {
-            setSearch(e.target.value);
-          }, 200)}
-          width={240}
-        />
+        <Inline space={16} verticalAlign="center">
+          <Input
+            onDark
+            placeholder="Search by ingredient..."
+            onChange={debounce((e) => {
+              setSearch(e.target.value);
+            }, 200)}
+            width={240}
+          />
+          <Button
+            onClick={() => {
+              router.push(`/cocktails/${getRandomCocktail().id}`);
+            }}
+          >
+            Get random cocktail!
+          </Button>
+        </Inline>
         <Inline space={24} horizontalAlign="space-between">
           {filteredCocktails.map((cocktail) => (
             <Link
