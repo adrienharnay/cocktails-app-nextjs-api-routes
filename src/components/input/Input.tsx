@@ -8,13 +8,15 @@ import { InputProps } from "./types";
 import styles from "./Input.module.scss";
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ width, className, label, error, ...otherProps }, ref) => {
+  ({ width, className, label, error, onDark, ...otherProps }, ref) => {
     return (
       <>
         <Label text={label} />
         <input
           ref={ref}
-          className={[styles.container, className].filter(Boolean).join(" ")}
+          className={[styles.container, onDark && styles.onDark, className]
+            .filter(Boolean)
+            .join(" ")}
           style={{ width }}
           {...otherProps}
         />

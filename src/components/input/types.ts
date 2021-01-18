@@ -5,4 +5,5 @@ export type InputProps = PropsWithoutRef<JSX.IntrinsicElements["input"]> & {
   className?: string;
   label?: ReactNode;
   error?: ReactNode;
+  onDark?: boolean;
 };
