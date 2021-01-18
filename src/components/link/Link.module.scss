@@ -1,0 +1,46 @@
+.link {
+  border: 0;
+  text-decoration: none;
+  outline: none;
+
+  &:not(.disabled) {
+    cursor: pointer;
+    touch-action: manipulation;
+
+    &.styled {
+      color: #06c6a3 !important;
+
+      font-weight: 700 !important;
+
+      &:hover {
+        text-decoration: underline;
+
+        * {
+          text-decoration: underline;
+        }
+      }
+
+      * {
+        color: #06c6a3 !important;
+        // stylelint-disable-next-line property-disallowed-list
+        font-weight: 700 !important;
+      }
+
+      &:visited {
+        color: #06c6a3 !important;
+
+        * {
+          color: #06c6a3 !important;
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    color: #c3fdf2 !important;
+
+    * {
+      color: #c3fdf2 !important;
+    }
+  }
+}

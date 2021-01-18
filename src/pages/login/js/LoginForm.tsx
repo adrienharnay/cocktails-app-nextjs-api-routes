@@ -7,6 +7,8 @@ import Header from "src/components/text/Header";
 
 import { setClientCookie } from "src/utils/next/ClientCookieUtils";
 import { useRouter } from "next/router";
+import Link from "src/components/link/Link";
+import Details from "src/components/text/Details";
 
 const timeout = (time: number) =>
   new Promise((resolve) => setTimeout(resolve, time));
@@ -50,7 +52,7 @@ const LoginForm: FunctionComponent = () => {
             }}
           />
         </Stack>
-        <Stack horizontalAlign="center">
+        <Stack space={16} horizontalAlign="center">
           <Button
             type="submit"
             disabled={!email || !password}
@@ -58,6 +60,13 @@ const LoginForm: FunctionComponent = () => {
           >
             Log in
           </Button>
+          <Link url="/register">
+            <Details color="text-primary-high" textAlign="center">
+              Don't have an account yet?
+              <br />
+              Register instead
+            </Details>
+          </Link>
         </Stack>
       </Stack>
     </form>
