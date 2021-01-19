@@ -10,26 +10,32 @@ import { useRouter } from "next/router";
 import Link from "src/components/link/Link";
 import Details from "src/components/text/Details";
 
-const timeout = (time: number) =>
-  new Promise((resolve) => setTimeout(resolve, time));
-
 const RegisterForm: FunctionComponent = () => {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [formState, setFormState] = useState<"initial" | "loading" | string>(
+    "initial"
+  );
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setFormState("loading");
 
-    console.log(email, password);
-    await timeout(400);
+    const res = await fetch("/api/register", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
 
-    setLoading(false);
-    setClientCookie("token", "VALID_TOKEN");
-    router.replace("/");
+    if (data.token) {
+      setFormState("initial");
+      setClientCookie("token", data.token);
+      router.replace("/");
+    } else {
+      setFormState(data.message);
+    }
   };
 
   return (
@@ -40,6 +46,11 @@ const RegisterForm: FunctionComponent = () => {
           <Input
             type="email"
             label="Email"
+            error={
+              !["initial", "loading"].includes(formState)
+                ? formState
+                : undefined
+            }
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -56,7 +67,7 @@ const RegisterForm: FunctionComponent = () => {
           <Button
             type="submit"
             disabled={!email || !password}
-            loading={loading}
+            loading={formState === "loading"}
           >
             Register
           </Button>
