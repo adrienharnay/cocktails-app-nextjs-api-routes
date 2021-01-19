@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import Box from "src/components/box/Box";
 import Button from "src/components/button/Button";
 import Inline from "src/components/inline/Inline";
@@ -11,6 +11,7 @@ import Header from "src/components/text/Header";
 import Subtitle from "src/components/text/Subtitle";
 
 import cocktails from "../../../../../data/cocktails.json";
+import Heart from "./components/Heart";
 
 const getRandomCocktail = () =>
   cocktails[Math.floor(Math.random() * cocktails.length)];
@@ -21,6 +22,8 @@ type CocktailPageProps = {
 
 const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
   const router = useRouter();
+
+  const [liked, setLiked] = useState(false);
 
   return (
     <Box padding={32}>
@@ -37,7 +40,23 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
           <Box paddingVertical={16} flexGrow={1}>
             <Stack space={16} flexGrow={1}>
               <Stack space={8} flexGrow={1}>
-                <Header color="text-primary-high">{cocktail.name}</Header>
+                <Inline space={8} verticalAlign="center">
+                  <Header color="text-primary-high">{cocktail.name}</Header>
+                  <Inline verticalAlign="center">
+                    <div
+                      role="button"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setLiked((prev) => !prev);
+                      }}
+                    >
+                      <Heart size={32} filled={liked} />
+                    </div>
+                    <Subtitle color="text-secondary-high">
+                      {liked ? 1 : 0}
+                    </Subtitle>
+                  </Inline>
+                </Inline>
                 <Subtitle color="text-primary-low">
                   {cocktail.category}
                 </Subtitle>
@@ -54,7 +73,7 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
         </Inline>
         <Stack space={8}>
           {cocktail.ingredients.map((ingredient) => (
-            <Body color="text-primary-high">
+            <Body key={ingredient.name} color="text-primary-high">
               <BodyHigh color="text-primary-high">
                 {ingredient.quantity}
               </BodyHigh>{" "}
