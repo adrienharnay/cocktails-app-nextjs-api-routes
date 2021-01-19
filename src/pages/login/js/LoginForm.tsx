@@ -18,18 +18,27 @@ const LoginForm: FunctionComponent = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [formState, setFormState] = useState<"initial" | "loading" | "error">(
+    "initial"
+  );
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setFormState("loading");
 
-    console.log(email, password);
-    await timeout(400);
+    const res = await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
 
-    setLoading(false);
-    setClientCookie("token", "VALID_TOKEN");
-    router.replace("/");
+    if (data.token) {
+      setFormState("initial");
+      setClientCookie("token", data.token);
+      router.replace("/");
+    } else {
+      setFormState(data.message);
+    }
   };
 
   return (
@@ -40,6 +49,12 @@ const LoginForm: FunctionComponent = () => {
           <Input
             type="email"
             label="Email"
+            error={
+              !["initial", "loading"].includes(formState) &&
+              formState.includes("email")
+                ? formState
+                : undefined
+            }
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -47,6 +62,12 @@ const LoginForm: FunctionComponent = () => {
           <Input
             type="password"
             label="Password"
+            error={
+              !["initial", "loading"].includes(formState) &&
+              formState.includes("password")
+                ? formState
+                : undefined
+            }
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -56,7 +77,7 @@ const LoginForm: FunctionComponent = () => {
           <Button
             type="submit"
             disabled={!email || !password}
-            loading={loading}
+            loading={formState === "loading"}
           >
             Log in
           </Button>
