@@ -1,11 +1,10 @@
-import React, { FunctionComponent, useMemo, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import Box from "src/components/box/Box";
 import Inline from "src/components/inline/Inline";
 import Stack from "src/components/stack/Stack";
 import Image from "next/image";
 import debounce from "lodash.debounce";
 
-import cocktails from "../../../../data/cocktails.json";
 import Subtitle from "src/components/text/Subtitle";
 import Link from "src/components/link/Link";
 
@@ -14,25 +13,39 @@ import Input from "src/components/input/Input";
 import Button from "src/components/button/Button";
 import { useRouter } from "next/router";
 
+import cocktailsJSON from "data/cocktails.json";
+import { getClientCookie } from "src/utils/next/ClientCookieUtils";
+
+type Cocktail = typeof cocktailsJSON[number];
+
 const CocktailsPage: FunctionComponent = () => {
   const router = useRouter();
 
+  const [cocktails, setCocktails] = useState<Cocktail[] | null>(null);
   const [search, setSearch] = useState("");
 
-  const filteredCocktails = useMemo(
-    () =>
-      !search
-        ? cocktails
-        : cocktails.filter((cocktail) =>
-            cocktail.ingredients.some((ingredient) =>
-              ingredient.name.toLowerCase().includes(search.toLowerCase())
-            )
-          ),
-    [search, cocktails]
-  );
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        `/api/cocktails${search ? `?search=${search}` : ""}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${getClientCookie("token")}`,
+          },
+        }
+      );
+      const data = await res.json();
+      setCocktails(data.cocktails);
+    })();
+  }, [search]);
+
+  if (!cocktails) {
+    return null;
+  }
 
   const getRandomCocktail = () =>
-    filteredCocktails[Math.floor(Math.random() * filteredCocktails.length)];
+    cocktails[Math.floor(Math.random() * cocktails.length)];
 
   return (
     <Box paddingHorizontal={32} paddingVertical={16}>
@@ -55,7 +68,7 @@ const CocktailsPage: FunctionComponent = () => {
           </Button>
         </Inline>
         <Inline space={24} horizontalAlign="space-between">
-          {filteredCocktails.map((cocktail) => (
+          {cocktails.map((cocktail) => (
             <Link
               key={cocktail.id}
               url={`/cocktails/${cocktail.id}`}
