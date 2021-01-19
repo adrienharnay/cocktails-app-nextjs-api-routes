@@ -67,7 +67,7 @@ const CocktailsPage: FunctionComponent = () => {
                 borderRadius={16}
                 boxShadow="shadow-around"
                 backgroundColor="background-white"
-                width={288}
+                width={256}
                 flexGrow={0}
               >
                 <Stack space={16} flexGrow={1} verticalAlign="space-between">

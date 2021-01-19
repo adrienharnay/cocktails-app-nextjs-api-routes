@@ -31,15 +31,15 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
         <Inline space={24}>
           <div style={{ borderRadius: 24, overflow: "hidden" }}>
             <Image
-              width={216}
-              height={160}
+              width={256}
+              height={220}
               objectFit="cover"
               src={cocktail.picture}
             />
           </div>
-          <Box paddingVertical={16} flexGrow={1}>
-            <Stack space={16} flexGrow={1}>
-              <Stack space={8} flexGrow={1}>
+          <Box paddingVertical={16}>
+            <Stack space={16}>
+              <Stack space={8}>
                 <Inline space={8} verticalAlign="center">
                   <Header color="text-primary-high">{cocktail.name}</Header>
                   <Inline verticalAlign="center">
@@ -60,14 +60,11 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
                 <Subtitle color="text-primary-low">
                   {cocktail.category}
                 </Subtitle>
-                <Box flexGrow={1} />
-                <Body color="text-primary-high">
-                  Glass:{" "}
-                  <BodyHigh color="text-primary-high">
-                    {cocktail.glass}
-                  </BodyHigh>
-                </Body>
               </Stack>
+              <Body color="text-primary-high">
+                Glass:{" "}
+                <BodyHigh color="text-primary-high">{cocktail.glass}</BodyHigh>
+              </Body>
             </Stack>
           </Box>
         </Inline>
