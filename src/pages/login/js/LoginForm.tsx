@@ -10,9 +10,6 @@ import { useRouter } from "next/router";
 import Link from "src/components/link/Link";
 import Details from "src/components/text/Details";
 
-const timeout = (time: number) =>
-  new Promise((resolve) => setTimeout(resolve, time));
-
 const LoginForm: FunctionComponent = () => {
   const router = useRouter();
 

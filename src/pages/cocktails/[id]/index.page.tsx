@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import ConnectedLayout from "src/components/connected-layout/js/ConnectedLayout";
 
 import MetaTitle from "src/components/meta/MetaTitle";
@@ -7,8 +7,12 @@ import MetaTitle from "src/components/meta/MetaTitle";
 import { requireToken } from "src/utils/next/ServerRouterUtils";
 import CocktailPage from "./js/CocktailPage";
 
-import cocktails from "../../../../data/cocktails.json";
 import { useRouter } from "next/router";
+import { getClientCookie } from "src/utils/next/ClientCookieUtils";
+
+import cocktailsJSON from "data/cocktails.json";
+
+type Cocktail = typeof cocktailsJSON[number];
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const redirect = requireToken(context);
@@ -22,7 +26,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const Cocktail: FunctionComponent = () => {
   const router = useRouter();
 
-  const cocktail = cocktails.find((c) => c.id === router.query.id);
+  const [cocktail, setCocktail] = useState<Cocktail | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`/api/cocktails/${router.query.id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${getClientCookie("token")}`,
+        },
+      });
+      const data = await res.json();
+      setCocktail(data.cocktail);
+    })();
+  }, [router.query.id]);
 
   if (!cocktail) {
     return null;

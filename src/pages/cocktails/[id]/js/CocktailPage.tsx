@@ -9,15 +9,17 @@ import Body from "src/components/text/Body";
 import BodyHigh from "src/components/text/BodyHigh";
 import Header from "src/components/text/Header";
 import Subtitle from "src/components/text/Subtitle";
-
-import cocktails from "../../../../../data/cocktails.json";
 import Heart from "./components/Heart";
 
+import cocktailsJSON from "data/cocktails.json";
+
+type Cocktail = typeof cocktailsJSON[number];
+
 const getRandomCocktail = () =>
-  cocktails[Math.floor(Math.random() * cocktails.length)];
+  cocktailsJSON[Math.floor(Math.random() * cocktailsJSON.length)];
 
 type CocktailPageProps = {
-  cocktail: typeof cocktails[number];
+  cocktail: Cocktail;
 };
 
 const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
