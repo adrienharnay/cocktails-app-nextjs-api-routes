@@ -12,7 +12,10 @@ import { getClientCookie } from "src/utils/next/ClientCookieUtils";
 
 import cocktailsJSON from "data/cocktails.json";
 
-type Cocktail = typeof cocktailsJSON[number];
+type Cocktail = typeof cocktailsJSON[number] & {
+  likes?: string[];
+  liked: boolean;
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const redirect = requireToken(context);

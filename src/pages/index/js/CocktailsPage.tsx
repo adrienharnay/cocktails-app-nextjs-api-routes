@@ -44,8 +44,17 @@ const CocktailsPage: FunctionComponent = () => {
     return null;
   }
 
-  const getRandomCocktail = () =>
-    cocktails[Math.floor(Math.random() * cocktails.length)];
+  const handleRandomCocktailClick = async () => {
+    const res = await fetch("/api/cocktails/random", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getClientCookie("token")}`,
+      },
+    });
+    const data = await res.json();
+
+    router.push(`/cocktails/${data.cocktail.id}`);
+  };
 
   return (
     <Box paddingHorizontal={32} paddingVertical={16}>
@@ -61,7 +70,7 @@ const CocktailsPage: FunctionComponent = () => {
           />
           <Button
             onClick={() => {
-              router.push(`/cocktails/${getRandomCocktail().id}`);
+              handleRandomCocktailClick();
             }}
           >
             Get random cocktail!

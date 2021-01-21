@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import Box from "src/components/box/Box";
 import Button from "src/components/button/Button";
 import Inline from "src/components/inline/Inline";
@@ -14,13 +14,13 @@ import Heart from "./components/Heart";
 import cocktailsJSON from "data/cocktails.json";
 import { getClientCookie } from "src/utils/next/ClientCookieUtils";
 
-type Cocktail = typeof cocktailsJSON[number];
-
-const getRandomCocktail = () =>
-  cocktailsJSON[Math.floor(Math.random() * cocktailsJSON.length)];
+type Cocktail = typeof cocktailsJSON[number] & {
+  likes?: string[];
+  liked: boolean;
+};
 
 type CocktailPageProps = {
-  cocktail: Cocktail & { likes?: string[]; liked: boolean };
+  cocktail: Cocktail;
 };
 
 const CocktailPage: FunctionComponent<CocktailPageProps> = ({
@@ -29,6 +29,10 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({
   const router = useRouter();
 
   const [cocktail, setCocktail] = useState(initialCocktail);
+
+  useEffect(() => {
+    setCocktail(initialCocktail);
+  }, [initialCocktail]);
 
   const toggleCocktailLike = async () => {
     const res = await fetch(`/api/cocktails/${cocktail.id}/toggle-like`, {
@@ -40,6 +44,18 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({
     const data = await res.json();
 
     setCocktail(data.cocktail);
+  };
+
+  const handleRandomCocktailClick = async () => {
+    const res = await fetch("/api/cocktails/random", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getClientCookie("token")}`,
+      },
+    });
+    const data = await res.json();
+
+    router.push(`/cocktails/${data.cocktail.id}`);
   };
 
   return (
@@ -98,7 +114,7 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({
         <Body color="text-primary-high">{cocktail.instructions}</Body>
         <Button
           onClick={() => {
-            router.push(`/cocktails/${getRandomCocktail().id}`);
+            handleRandomCocktailClick();
           }}
         >
           Get random cocktail!

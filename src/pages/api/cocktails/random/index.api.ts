@@ -43,9 +43,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     })
   );
 
-  const cocktail = cocktails.find(
-    (cocktail: Cocktail) => cocktail.id === req.query.id
-  );
+  const search = typeof req.query.search === "string" ? req.query.search : "";
+
+  const filteredCocktails = !search
+    ? cocktails
+    : cocktails.filter((cocktail: Cocktail) =>
+        cocktail.ingredients.some((ingredient) =>
+          ingredient.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+
+  const cocktail =
+    filteredCocktails[Math.floor(Math.random() * filteredCocktails.length)];
 
   res.status(200).json({
     cocktail: {
