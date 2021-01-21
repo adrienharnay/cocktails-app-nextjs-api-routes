@@ -50,7 +50,7 @@ Steps:
 
 - Create a `/pages/api` folder
 - For each request, create a `[requestName].ts` file in the `pages/api` folder
-- Implement logic as you would in a regular Express app (examples [here]())
-- Call the routes you have created in your React code, pointing to `/api/[requestName]` (example [here]())
+- Implement logic as you would in a regular Express app (examples [here](https://github.com/adrienharnay/cocktails-app-nextjs-api-routes/blob/master/src/pages/api/cocktails/index.api.ts))
+- Call the routes you have created in your React code, pointing to `/api/[requestName]` (example [here](https://github.com/adrienharnay/cocktails-app-nextjs-api-routes/blob/master/src/pages/index/js/CocktailsPage.tsx#L27-L41))
 
 That's it, you have your back-end!
