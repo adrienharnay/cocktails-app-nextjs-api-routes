@@ -24,6 +24,7 @@
     "modules:clean": "rm -rf node_modules",
     "cache:clean": "rm -rf node_modules/.cache && rm -rf .next/cache",
     "build:clean": "rm -rf .next && rm -rf out",
+    "prepare": "node generateTokens.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"

@@ -14,3 +14,6 @@ tsconfig.tsbuildinfo
 
 # Build
 .next/
+
+.env.development
+.env.production
