@@ -1,6 +1,7 @@
 {
   "name": "cocktails-app-nextjs-api-routes",
   "version": "1.0.0",
+  "license": "MIT",
   "dependencies": {
     "jsonwebtoken": "8.5.1",
     "lodash.debounce": "4.0.8",
