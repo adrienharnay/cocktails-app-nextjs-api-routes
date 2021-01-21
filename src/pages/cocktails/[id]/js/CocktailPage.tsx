@@ -12,6 +12,7 @@ import Subtitle from "src/components/text/Subtitle";
 import Heart from "./components/Heart";
 
 import cocktailsJSON from "data/cocktails.json";
+import { getClientCookie } from "src/utils/next/ClientCookieUtils";
 
 type Cocktail = typeof cocktailsJSON[number];
 
@@ -19,13 +20,27 @@ const getRandomCocktail = () =>
   cocktailsJSON[Math.floor(Math.random() * cocktailsJSON.length)];
 
 type CocktailPageProps = {
-  cocktail: Cocktail;
+  cocktail: Cocktail & { likes?: string[]; liked: boolean };
 };
 
-const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
+const CocktailPage: FunctionComponent<CocktailPageProps> = ({
+  cocktail: initialCocktail,
+}) => {
   const router = useRouter();
 
-  const [liked, setLiked] = useState(false);
+  const [cocktail, setCocktail] = useState(initialCocktail);
+
+  const toggleCocktailLike = async () => {
+    const res = await fetch(`/api/cocktails/${cocktail.id}/toggle-like`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${getClientCookie("token")}`,
+      },
+    });
+    const data = await res.json();
+
+    setCocktail(data.cocktail);
+  };
 
   return (
     <Box padding={32}>
@@ -49,13 +64,13 @@ const CocktailPage: FunctionComponent<CocktailPageProps> = ({ cocktail }) => {
                       role="button"
                       style={{ cursor: "pointer" }}
                       onClick={() => {
-                        setLiked((prev) => !prev);
+                        toggleCocktailLike();
                       }}
                     >
-                      <Heart size={32} filled={liked} />
+                      <Heart size={32} filled={cocktail.liked} />
                     </div>
                     <Subtitle color="text-secondary-high">
-                      {liked ? 1 : 0}
+                      {cocktail.likes?.length || 0}
                     </Subtitle>
                   </Inline>
                 </Inline>

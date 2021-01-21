@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync } from "fs";
 import path from "path";
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
+import { v4 as uuid } from "uuid";
 
 const accountsFile = path.resolve("src/pages/api/accounts.json");
 
@@ -31,14 +32,21 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const token = jwt.sign(body.password, process.env.TOKEN_SECRET as string);
+  const token = jwt.sign(
+    { id: uuid(), ...body },
+    process.env.TOKEN_SECRET as string
+  );
 
   writeFileSync(
     accountsFile,
-    JSON.stringify({
-      ...accounts,
-      [body.email]: token,
-    }),
+    JSON.stringify(
+      {
+        ...accounts,
+        [body.email]: token,
+      },
+      undefined,
+      2
+    ),
     { encoding: "utf-8" }
   );
 

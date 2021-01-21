@@ -5,6 +5,12 @@ import jwt from "jsonwebtoken";
 
 const accountsFile = path.resolve("src/pages/api/accounts.json");
 
+type TokenDecrypted = {
+  id: string;
+  email: string;
+  password: string;
+};
+
 /*
  ** DO NOT implement in production, this code is naive only for demonstration
  */
@@ -33,9 +39,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const password = jwt.verify(token, process.env.TOKEN_SECRET as string);
+  const tokenDecrypted = jwt.verify(
+    token,
+    process.env.TOKEN_SECRET as string
+  ) as TokenDecrypted;
 
-  if (password !== body.password) {
+  if (tokenDecrypted.password !== body.password) {
     res.status(500).json({
       statusCode: 500,
       message: "The password is incorrect",

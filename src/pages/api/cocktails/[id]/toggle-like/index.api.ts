@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import path from "path";
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
@@ -16,7 +16,7 @@ type TokenDecrypted = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "GET") {
+  if (req.method !== "PATCH") {
     res.status(404).send("Not found");
     return;
   }
@@ -35,20 +35,47 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
+  const userId = tokenDecrypted.id;
+
   const cocktails = JSON.parse(
     readFileSync(cocktailsFile, {
       encoding: "utf-8",
     })
   );
 
-  const cocktail = cocktails.find(
+  const cocktailIndex = cocktails.findIndex(
     (cocktail: Cocktail) => cocktail.id === req.query.id
+  );
+
+  const cocktail = cocktails[cocktailIndex];
+  const cocktailUpdated = {
+    ...cocktail,
+    likes:
+      cocktail.likes && cocktail.likes.includes(userId)
+        ? (cocktail.likes as string[]).filter((like) => like !== userId)
+        : [...(cocktail.likes || []), userId],
+  };
+
+  writeFileSync(
+    cocktailsFile,
+    JSON.stringify(
+      [
+        ...cocktails.slice(0, cocktailIndex),
+        cocktailUpdated,
+        ...cocktails.slice(cocktailIndex + 1),
+      ],
+      undefined,
+      2
+    ),
+    {
+      encoding: "utf-8",
+    }
   );
 
   res.status(200).json({
     cocktail: {
-      ...cocktail,
-      liked: cocktail.likes && cocktail.likes.includes(tokenDecrypted.id),
+      ...cocktailUpdated,
+      liked: cocktailUpdated.likes && cocktailUpdated.likes.includes(userId),
     },
   });
 }
