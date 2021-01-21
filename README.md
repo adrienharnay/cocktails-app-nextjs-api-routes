@@ -1,8 +1,16 @@
-# Cocktails app: Next.js API routes
+# Cocktails app 🍸 Next.js API routes
 
 This app is an example of how you can use Next.js API Routes as a back-end to your Next.js application.
 
-Note: It is meant to be a reference project for my tests with other back-end solutions. Implementation is naive and shouldn't be replicated in real apps.
+Note: It is meant to be a reference project for my tests with other back-end solutions. Back-end implementation is naive and shouldn't be replicated in real apps. Front-end implementation (such as design) doesn't matter much.
+
+## Development
+
+```
+yarn
+yarn prepare
+yarn dev
+```
 
 ## Introduction
 
