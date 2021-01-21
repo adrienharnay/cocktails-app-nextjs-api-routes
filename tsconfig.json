@@ -9,7 +9,6 @@
     ],
     "jsx": "preserve",
     "noEmit": true,
-    "incremental": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
