@@ -20,7 +20,7 @@ I want to try and list the differences between major back-end solutions and how 
 
 For the test to be relevant, the app should support the following features:
 
-- Authentication features (content will be protected behind authentication)
+- Authentication (content will be protected behind authentication)
 - List of cocktails (list querying), search by ingredient (search), and access a cocktail details (item querying)
 - Like cocktails (simple write)
 - Display a cocktail at random (custom logic)
