@@ -16,7 +16,7 @@ Note: don't forget `yarn prepare`, as it will generate secrets for handling auth
 
 ## Introduction
 
-I want to try and list the differences between major back-end solutions and how well they integrate with Next.js, to help fellow front-end developers choose the solution that best fits their next project. To do so, I will build a Cocktails app with different back-end solutions, and compare them all at the end. You can find the article [here](https://adrien.harnay.me/2021-01-22-using-nextjs-api-routes).
+I want to try and list the differences between major back-end solutions and how well they integrate with Next.js, to help fellow front-end developers choose the solution that best fits their next project. To do so, I will build a Cocktails app with different back-end solutions, and compare them all at the end. You can find the article [here](https://adrien.harnay.me/2021-01-22-using-nextjs-api-routes-as-a-back-end-for-your-nextjs-app).
 
 For the test to be relevant, the app should support the following features:
 
